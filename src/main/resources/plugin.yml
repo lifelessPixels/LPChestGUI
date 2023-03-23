@@ -1,0 +1,4 @@
+name: LPChestGUI
+main: pl.lifelesspixels.lpchestgui.LPChestGUI
+version: 0.1
+api-version: 1.19
