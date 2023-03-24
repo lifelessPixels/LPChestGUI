@@ -5,14 +5,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import pl.lifelesspixels.lpchestgui.gui.ChestGUI;
 
-public class PlayerItemActionContext {
+public class ChestGUIPlayerItemActionContext {
 
     private final Player player;
     private final int slot;
     private final ClickType clickType;
     private final ChestGUI gui;
 
-    public PlayerItemActionContext(Player player, int slot, ClickType clickType, ChestGUI gui) {
+    public ChestGUIPlayerItemActionContext(Player player, int slot, ClickType clickType, ChestGUI gui) {
         this.player = player;
         this.slot = slot;
         this.clickType = clickType;

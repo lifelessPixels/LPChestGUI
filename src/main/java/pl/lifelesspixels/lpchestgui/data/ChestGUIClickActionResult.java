@@ -1,6 +1,6 @@
 package pl.lifelesspixels.lpchestgui.data;
 
-public enum GUIActionResult {
+public enum ChestGUIClickActionResult {
 
     RemainOpen,
     Close

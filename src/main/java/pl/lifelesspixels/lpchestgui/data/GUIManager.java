@@ -1,19 +1,20 @@
 package pl.lifelesspixels.lpchestgui.data;
 
 import org.bukkit.entity.Player;
+import pl.lifelesspixels.lpchestgui.gui.BaseGUI;
 import pl.lifelesspixels.lpchestgui.gui.ChestGUI;
 
 import java.util.HashMap;
 
 public class GUIManager {
 
-    private final HashMap<Player, ChestGUI> openedGUIs = new HashMap<>();
+    private final HashMap<Player, BaseGUI> openedGUIs = new HashMap<>();
 
-    public void setGUIForPlayer(Player player, ChestGUI gui) {
+    public void setGUIForPlayer(Player player, BaseGUI gui) {
         openedGUIs.put(player, gui);
     }
 
-    public ChestGUI getGUIForPlayer(Player player) {
+    public BaseGUI getGUIForPlayer(Player player) {
         return openedGUIs.get(player);
     }
 
