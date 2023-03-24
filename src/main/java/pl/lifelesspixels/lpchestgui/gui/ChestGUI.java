@@ -12,6 +12,7 @@ import pl.lifelesspixels.lpchestgui.LPChestGUI;
 import pl.lifelesspixels.lpchestgui.data.*;
 
 import java.util.Objects;
+import java.util.function.Consumer;
 
 public class ChestGUI {
 
@@ -30,6 +31,7 @@ public class ChestGUI {
     private final GUIAction[] actions;
     private final Sound[] actionSounds;
     private final Inventory backingInventory;
+    private Consumer<PlayerItemActionContext> playerItemClickedHandler = null;
 
     public ChestGUI(int rows) {
         if(rows < 1 || rows > 6)
@@ -77,6 +79,10 @@ public class ChestGUI {
         backingInventory.setItem(slot, item);
     }
 
+    public void setPlayerItemClickedHandler(Consumer<PlayerItemActionContext> handler) {
+        playerItemClickedHandler = handler;
+    }
+
     public void resetSlot(int slot) {
         if(slot < 0 || slot > actions.length)
             throw new IllegalArgumentException("slot must be in valid range for the backing inventory");
@@ -117,6 +123,18 @@ public class ChestGUI {
         GUIActionResult result = actions[slot].runCallback(context, clickType);
         if(result == GUIActionResult.Close)
             scheduleInventoryCloseFor(player);
+    }
+
+    public void onPlayerItemClicked(Player player, int slot, ClickType clickType) {
+        Inventory inventory = player.getInventory();
+        if(slot < 0 || slot >= inventory.getSize())
+            throw new IllegalArgumentException("slot must be in valid range for the player's inventory");
+
+        if(inventory.getItem(slot) == null || playerItemClickedHandler == null)
+            return;
+
+        PlayerItemActionContext context = new PlayerItemActionContext(player, slot, clickType, this);
+        playerItemClickedHandler.accept(context);
     }
 
     private void fillInventoryWithEmptySlotItems() {

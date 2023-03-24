@@ -23,10 +23,7 @@ public class InventoryEventsListener implements Listener {
         ChestGUI gui = guiManager.getGUIForPlayer(player);
         if(gui == null)
             return;
-        if(!gui.isBackingInventory(event.getClickedInventory())) {
-            LPChestGUI.getInstance().getLogger().info("clicked on player's inventory");
-            return;
-        }
+
 
         ClickType clickType;
         switch (event.getClick()) {
@@ -41,7 +38,9 @@ public class InventoryEventsListener implements Listener {
         }
 
         int slot = event.getSlot();
-        gui.onGuiItemClicked(player, slot, clickType);
+        if(!gui.isBackingInventory(event.getClickedInventory())) {
+            gui.onPlayerItemClicked(player, slot, clickType);
+        } else gui.onGuiItemClicked(player, slot, clickType);
         event.setCancelled(true);
     }
 
