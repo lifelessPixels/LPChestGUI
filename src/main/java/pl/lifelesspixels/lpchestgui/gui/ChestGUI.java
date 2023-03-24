@@ -56,7 +56,7 @@ public class ChestGUI {
     public void setAction(int slot, GUIAction action, ItemStack item) {
         if(slot < 0 || slot > actions.length)
             throw new IllegalArgumentException("slot must be in valid range for the backing inventory");
-        if(backingInventory.getItem(slot) != EMPTY_INVENTORY_SLOT_ITEM)
+        if(!Objects.requireNonNull(backingInventory.getItem(slot)).isSimilar(EMPTY_INVENTORY_SLOT_ITEM))
             throw new IllegalArgumentException("cannot set action for non-empty slot");
 
         actions[slot] = action;
@@ -71,7 +71,7 @@ public class ChestGUI {
     public void setDummyItem(int slot, ItemStack item) {
         if(slot < 0 || slot > actions.length)
             throw new IllegalArgumentException("slot must be in valid range for the backing inventory");
-        if(backingInventory.getItem(slot) != EMPTY_INVENTORY_SLOT_ITEM)
+        if(!Objects.requireNonNull(backingInventory.getItem(slot)).isSimilar(EMPTY_INVENTORY_SLOT_ITEM))
             throw new IllegalArgumentException("cannot set dummy item for non-empty slot");
 
         backingInventory.setItem(slot, item);
