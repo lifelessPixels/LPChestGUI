@@ -86,6 +86,10 @@ public class ChestGUI {
         backingInventory.setItem(slot, EMPTY_INVENTORY_SLOT_ITEM);
     }
 
+    public boolean isBackingInventory(Inventory inventory) {
+        return backingInventory == inventory;
+    }
+
     public void openFor(Player player) {
         GUIManager guiManager = LPChestGUI.getInstance().getGUIManager();
         if(guiManager.hasOpenGUI(player)) {

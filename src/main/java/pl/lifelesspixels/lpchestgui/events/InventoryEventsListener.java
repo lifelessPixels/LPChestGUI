@@ -14,12 +14,19 @@ public class InventoryEventsListener implements Listener {
 
     @EventHandler
     public void onInventoryItemClicked(InventoryClickEvent event) {
+        if(event.getSlot() < 0)
+            return;
+
         GUIManager guiManager = LPChestGUI.getInstance().getGUIManager();
         Player player = (Player)(event.getWhoClicked());
 
         ChestGUI gui = guiManager.getGUIForPlayer(player);
         if(gui == null)
             return;
+        if(!gui.isBackingInventory(event.getClickedInventory())) {
+            LPChestGUI.getInstance().getLogger().info("clicked on player's inventory");
+            return;
+        }
 
         ClickType clickType;
         switch (event.getClick()) {
