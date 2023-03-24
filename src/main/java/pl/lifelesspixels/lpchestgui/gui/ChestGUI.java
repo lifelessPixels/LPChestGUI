@@ -36,7 +36,7 @@ public class ChestGUI extends BaseGUI {
         this.rows = rows;
         this.actions = new ChestGUIClickAction[rows * 9];
         this.actionSounds = new Sound[rows * 9];
-        this.backingInventory = Bukkit.createInventory(null, rows * 9, title);
+        this.backingInventory = Bukkit.createInventory(null, rows * 9, adjustDisplayName(title));
         fillInventoryWithEmptySlotItems(this.backingInventory);
     }
 
@@ -109,6 +109,14 @@ public class ChestGUI extends BaseGUI {
 
         ChestGUIPlayerItemActionContext context = new ChestGUIPlayerItemActionContext(player, slot, clickType, this);
         playerItemClickedHandler.accept(context);
+    }
+
+    private String adjustDisplayName(String displayName) {
+        if(displayName.length() <= 32)
+            return displayName;
+
+        String result = displayName.substring(0, 29) + "...";
+        return result;
     }
 
 }
