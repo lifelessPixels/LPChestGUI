@@ -26,4 +26,11 @@ public class GUIManager {
         return openedGUIs.containsKey(player);
     }
 
+    public void closeAllCurrentlyOpenedGUIs() {
+        for(Player player : openedGUIs.keySet())
+            player.closeInventory();
+
+        openedGUIs.clear();
+    }
+
 }

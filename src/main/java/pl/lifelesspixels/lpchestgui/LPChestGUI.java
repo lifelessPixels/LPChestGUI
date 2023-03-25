@@ -7,21 +7,27 @@ import pl.lifelesspixels.lpchestgui.events.InventoryEventsListener;
 public class LPChestGUI extends JavaPlugin {
 
     private static LPChestGUI instance;
-    private GUIManager GUIManager;
+    private GUIManager guiManager;
 
     @Override
     public void onEnable() {
         instance = this;
 
         // create data storage
-        GUIManager = new GUIManager();
+        guiManager = new GUIManager();
 
         // register event handlers
         getServer().getPluginManager().registerEvents(new InventoryEventsListener(), this);
     }
 
+    @Override
+    public void onDisable() {
+        // close all open GUIs
+        guiManager.closeAllCurrentlyOpenedGUIs();
+    }
+
     public GUIManager getGUIManager() {
-        return GUIManager;
+        return guiManager;
     }
 
     public static LPChestGUI getInstance() {
