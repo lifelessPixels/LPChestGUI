@@ -32,6 +32,7 @@ public abstract class BaseGUI {
             scheduleInventoryReopenFor(player);
         } else {
             guiManager.setGUIForPlayer(player, this);
+            onOpen(player);
             player.openInventory(getBackingInventory());
         }
     }
@@ -40,6 +41,7 @@ public abstract class BaseGUI {
         scheduleInventoryCloseFor(player);
     }
 
+    public void onOpen(Player player) { }
     public void onGUIItemClicked(Player player, int slot, ClickType clickType) { }
     public void onPlayerItemClicked(Player player, int slot, ClickType clickType) { }
     public void onInventoryClosed(Player player) { }
