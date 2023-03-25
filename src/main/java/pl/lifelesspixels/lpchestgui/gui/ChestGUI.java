@@ -77,6 +77,11 @@ public class ChestGUI extends BaseGUI {
         backingInventory.setItem(slot, EMPTY_INVENTORY_SLOT_ITEM);
     }
 
+    public void resetAllSlots() {
+        for(int index = 0; index < rows * 9; index++)
+            resetSlot(index);
+    }
+
     @Override
     protected Inventory getBackingInventory() {
         return backingInventory;
