@@ -58,7 +58,9 @@ public class ChestGUI extends BaseGUI {
     public void setDummyItem(int slot, ItemStack item) {
         if(slot < 0 || slot > actions.length)
             throw new IllegalArgumentException("slot must be in valid range for the backing inventory");
-        if(!Objects.requireNonNull(backingInventory.getItem(slot)).isSimilar(EMPTY_INVENTORY_SLOT_ITEM))
+
+        ItemStack itemInInventory = backingInventory.getItem(slot);
+        if(itemInInventory != null && !itemInInventory.isSimilar(EMPTY_INVENTORY_SLOT_ITEM))
             throw new IllegalArgumentException("cannot set dummy item for non-empty slot");
 
         backingInventory.setItem(slot, item);
